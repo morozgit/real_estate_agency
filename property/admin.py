@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Flat
+from .models import Flat, Complaint
 
 
 
@@ -23,3 +23,17 @@ class FlatAdmin(admin.ModelAdmin):
         )
 
 admin.site.register(Flat, FlatAdmin)
+
+class ComplaintAdmin(admin.ModelAdmin):
+    list_display = (
+        'author',
+        'complaint_flat',
+        'complaint_text',
+        )
+    raw_id_fields = (
+        'author',
+        'complaint_flat',
+        )
+
+
+admin.site.register(Complaint, ComplaintAdmin)
