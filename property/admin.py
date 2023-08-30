@@ -21,6 +21,9 @@ class FlatAdmin(admin.ModelAdmin):
         'has_balcony',
         'active',
         )
+    raw_id_fields = (
+        'liked_by',
+        )
 
 admin.site.register(Flat, FlatAdmin)
 
