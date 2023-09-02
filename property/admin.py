@@ -2,6 +2,9 @@ from django.contrib import admin
 
 from .models import Flat, Complaint, Owner
 
+class FlatInstanceInline(admin.TabularInline):
+    model = Owner.flats.through
+    raw_id_fields = ('owner',)
 
 
 class FlatAdmin(admin.ModelAdmin):
@@ -24,6 +27,7 @@ class FlatAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'liked_by',
         )
+    inlines = [FlatInstanceInline]
 
 admin.site.register(Flat, FlatAdmin)
 
