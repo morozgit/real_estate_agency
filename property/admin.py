@@ -34,12 +34,12 @@ admin.site.register(Flat, FlatAdmin)
 class ComplaintAdmin(admin.ModelAdmin):
     list_display = (
         'author',
-        'complaint_flat',
-        'complaint_text',
+        'flat',
+        'text',
         )
     raw_id_fields = (
         'author',
-        'complaint_flat',
+        'flat',
         )
 
 
