@@ -7,12 +7,15 @@ import phonenumbers
 def set_phone_number(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     flats = Flat.objects.all()
-    for flat in flats:
-        phonenumber = phonenumbers.parse(flat.owners_phonenumber, 'RU')
-        if phonenumbers.is_valid_number(phonenumber):
-            flat.owner_pure_phone = phonenumber
-        else:
-            flat.owner_pure_phone = None
+    for flat in flats.iterator():
+        try:
+            phonenumber = phonenumbers.parse(flat.owners_phonenumber, 'RU')
+            if phonenumbers.is_valid_number(phonenumber):
+                flat.owner_pure_phone = phonenumber
+            else:
+                flat.owner_pure_phone = None
+        except (phonenumbers.NumberParseException, AttributeError):
+            continue
         flat.save()
 
 
